@@ -104,4 +104,59 @@ const SECTIONS = {
     </section>
   `,
 
-};
+};// ----------------------------------------------------------
+// AUTOPILOT PLANS — v1.99
+// Light • Deep • Max (Ultra)
+// Each returns a list of Sandbox Commands
+// ----------------------------------------------------------
+
+// ---------- LIGHT MODE ----------
+function buildLightPlan(project) {
+  return [
+    { type: "SET_TEMPLATE", template: "simple" },
+    { type: "ADD_SECTION", html: SECTIONS.benefits },
+    { type: "ADD_SECTION", html: SECTIONS.pricing }
+  ];
+}
+
+// ---------- DEEP MODE ----------
+function buildDeepPlan(project) {
+  return [
+    { type: "SET_TEMPLATE", template: "simple" },
+    { type: "ADD_SECTION", html: SECTIONS.hero },
+    { type: "ADD_SECTION", html: SECTIONS.benefits },
+    { type: "ADD_SECTION", html: SECTIONS.features },
+    { type: "ADD_SECTION", html: SECTIONS.pricing },
+    { type: "ADD_SECTION", html: SECTIONS.faq },
+    { type: "ADD_SECTION", html: SECTIONS.contact }
+  ];
+}
+
+// ---------- MAX / ULTRA MODE ----------
+function buildMaxPlan(project) {
+  return [
+    { type: "SET_TEMPLATE", template: "simple" },
+
+    // Structure: Hero → Benefits → Features → Testimonials → Pricing → FAQ → Contact → Final CTA
+    { type: "ADD_SECTION", html: SECTIONS.hero },
+    { type: "ADD_SECTION", html: SECTIONS.benefits },
+    { type: "ADD_SECTION", html: SECTIONS.features },
+    { type: "ADD_SECTION", html: SECTIONS.testimonials },
+    { type: "ADD_SECTION", html: SECTIONS.pricing },
+    { type: "ADD_SECTION", html: SECTIONS.faq },
+    { type: "ADD_SECTION", html: SECTIONS.contact },
+    { type: "ADD_SECTION", html: SECTIONS.finalCTA },
+  ];
+}
+
+// ----------------------------------------------------------
+// MAIN EXPORT
+// ----------------------------------------------------------
+export function buildAutopilotPlan(project, mode = "light") {
+  if (mode === "light") return buildLightPlan(project);
+  if (mode === "deep") return buildDeepPlan(project);
+  if (mode === "max") return buildMaxPlan(project);
+
+  // fallback
+  return buildLightPlan(project);
+}
